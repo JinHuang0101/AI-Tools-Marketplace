@@ -1,0 +1,164 @@
+{{!-- Adapted from the starter code  --}}
+{{!-- Citation: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style>
+        body{
+            background-color: #9df9ef;
+        }
+
+        h1{
+            color: black;
+            font-family: "Droid Sans";
+            text-align: center;
+            font-size: 60px;
+        }
+        h2{
+            color: black;
+            font-family: "Droid Sans";
+            text-align: center;
+            font-size: 30px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: lavender;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #51e2f5;
+            color: white;
+        }
+        form{
+            text-align-last: center;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: 20px;
+        }
+        label, p{
+            font-size: 20px;
+        }
+         .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+</head>
+<body>
+<!-- div for nav bar html links -->
+<div class="topnav">  
+    <a href="index.html">Home</a>
+    <a href="users.html">Users</a>
+    <a href="AItools.html">AI Tools</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="orders.html">Orders</a>
+    <a href="orderdetails.html">Order Details</a>
+    <a href="developers.html">Developers</a>
+    <a href="developerDetails.html">Developer Details</a>
+</div>
+
+<h1>Users Page</h1>
+{{!-- table  --}}
+<table id="users-table" class="center">
+    {{!-- header  --}}
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>User Name</th>
+      <th>User Location</th>
+      <th>User Website</th>
+      <th>User Industry</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{!-- data  --}}
+    {{#each data}}
+      <tr>
+        <td>{{this.user_id}}</td>
+        <td>{{this.user_name}}</td>
+        <td>{{this.user_location}}</td>
+        <td>{{this.user_website}}</td>
+        <td>{{this.user_industry}}</td>
+        <td><button onclick="deleteUser({{this.user_id}})">Delete</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+</body>
+</html>
+
+{{!-- add data  --}}
+<h2>Adding Data with AJAX</h2>
+<p>To add a new user, please enter their information below and click 'Submit'!</p>
+<form id="add-user-form-ajax">
+    <label for="input-user_name">user name: </label>
+    <input type="text" name="input-user_name" id="input-user_name">
+    <label for="input-user_location">user location: </label>
+    <input type="text" name="input-user_location" id="input-user_location">
+    <label for="input-user_website">user website: </label>
+    <input type="text" name="input-user_website" id="input-user_website">
+    <label for="input-user_industry">user industry: </label>
+    <input type="text" name="input-user_industry" id="input-user_industry">
+    <input type="submit">
+</form>
+
+{{!-- search data  --}}
+<h2>Search Using an HTML Form</h2>
+<p>Search by User Name using the field below. </p>
+<form id="search-user-html" method="GET" action="/users.html">
+    <label for="input-user_name">Search by User Name: </label>
+    <input type="text" name="user_name" id="input-user_name-html-search">
+    <input type="submit">
+    <a href="/users.html"><button>Reset</button></a>
+</form>
+
+{{!-- add js script  --}}
+<script src="./js/add_user.js"></script>
+
+<script src="./js/delete_user.js"></script>
+
+{{!-- update  --}}
+<h2>Updating A User's website</h2>
+<p>To update a specific user select the user id from the drop-down menu on the left and input their desired user website on the right</p>
+<form id="update-user-form-ajax">
+    <label for="input-user_id">User ID: </label>
+    <select name="input-user_id" id="mySelect">
+        <option value="test">Select a User</option>
+        {{#each data}}
+        <option value="{{this.user_id}}">{{this.user_name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-user_website">User website: </label>
+    <input type="text" name="input-user_website" id="input-user_website-update">
+    <input type="submit">
+</form>
+<script src="./js/update_user.js"></script>

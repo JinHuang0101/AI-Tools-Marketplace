@@ -1,0 +1,159 @@
+{{!-- Adapted from the starter code  --}}
+{{!-- Citation: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+    <style>
+        body{
+            background-color: #9df9ef;
+        }
+
+        h1{
+            color: black;
+            font-family: "Droid Sans";
+            text-align: center;
+            font-size: 60px;
+        }
+        h2{
+            color: black;
+            font-family: "Droid Sans";
+            text-align: center;
+            font-size: 30px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: lavender;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #51e2f5;
+            color: white;
+        }
+        form{
+            text-align-last: center;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: 20px;
+        }
+         .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        label, p{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="topnav">    
+    <a href="index.html">Home</a>
+    <a href="users.html">Users</a>
+    <a href="AItools.html">AI Tools</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="orders.html">Orders</a>
+    <a href="orderdetails.html">Order Details</a>
+    <a href="developers.html">Developers</a>
+    <a href="developerDetails.html">Developer Details</a>
+</div>
+
+<h1>Orders Page</h1>
+{{!-- table  --}}
+<table id="orders-table" calss="center">
+  <thead>
+      <th>Order ID</th>
+      <th>User ID</th>
+      <th>User Name</th>
+      <th>Order Date</th>
+      <th>Order Amount</th>
+      <th>Payment Complete</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {{!-- data  --}}
+    {{#each data}}
+      <tr>
+        <td>{{this.order_id}}</td>
+        <td>{{this.user_id}}</td>
+        <td>{{this.user_name}}</td>
+        <td>{{this.order_date}}</td>
+        <td>{{this.order_amount}}</td>
+        <td>{{this.payment_complete}}</td>
+        <td><button onclick="deleteOrder({{this.order_id}})">Delete</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+</body>
+</html>
+
+{{!-- add data  --}}
+<h2>Adding Data with AJAX</h2>
+<p>To add a new order, please enter their information below and click 'Submit'!</p>
+<form id="add-order-form-ajax">
+
+    <select name="input-user_id" id="input-user_id">
+      <option value="">Select a User</option>
+      {{#each users}}
+      <option value="{{this.user_id}}">{{this.user_name}}</option>
+      {{/each}}
+    </select>
+
+    <label for="input-order_date">order date: </label>
+    <input type="date" name="input-order_date" id="input-order_date">
+    <label for="input-order_amount">order amount: </label>
+    <input type="text" name="input-order_amount" id="input-order_amount">
+
+    <label for="input-payment_complete">payment complete: </label>
+    <select name="input-payment_complete" id="input-payment_complete">
+        <option value="Select">Select</option>
+        <option value="TRUE">Complete</option>
+        <option value="FALSE">Incomplete</option>
+    </select>
+
+    <input type="submit">
+</form>
+
+{{!-- search  --}}
+<h2>Search Using an HTML Form</h2>
+<p>Search by Order ID using the field below. </p>
+<form id="search-order-html" method="GET" action="/orders.html">
+    <label for="input-order_id">Search by Order ID: </label>
+   <input type="number" name="order_id" id="input-order_id-html-search">
+    <input type="submit">
+</form>
+
+<div style="text-align:center">
+    <a href="/orders.html"><button>Reset</button></a>
+</div>
+
+{{!-- add js script  --}}
+<script src="./js/add_order.js"></script>
+<script src="./js/delete_order.js"></script>

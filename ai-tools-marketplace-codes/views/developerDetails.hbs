@@ -1,0 +1,202 @@
+{{!-- Adapted from the starter code  --}}
+{{!-- Citation: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Developer Details</title>
+    <style>
+        body{
+            background-color: #9df9ef;
+        }
+
+        h1{
+            color: black;
+            font-family: "Droid Sans";
+            text-align: center;
+            font-size: 60px;
+        }
+        h2{
+            color: black;
+            font-family: "Droid Sans";
+            text-align: center;
+            font-size: 30px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: lavender;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #51e2f5;
+            color: white;
+        }
+        form, p{
+            text-align-last: center;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: 20px;
+        }
+         .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        label, p{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- div for nav bar html links -->
+<div class="topnav">    
+    <a href="index.html">Home</a>
+    <a href="users.html">Users</a>
+    <a href="AItools.html">AI Tools</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="orders.html">Orders</a>
+    <a href="orderdetails.html">Order Details</a>
+    <a href="developers.html">Developers</a>
+    <a href="developerDetails.html">Developer Details</a>
+</div>
+<h1>Developer Details Page</h1>
+{{!-- table  --}}
+<table id="dev-detail-table" class="center">
+  <thead>
+    <tr>
+      <th>Developer Details ID</th>
+      <th>Tool ID</th>
+      <th>Tool Name</th>
+      <th>Developer ID</th>
+      <th>Deverloper Name</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+     {{!-- data  --}}
+    {{#each data}}
+      <tr>
+        <td>{{this.dev_details_id}}</td>
+        <td>{{this.tool_id}}</td>
+        <td>{{this.tool_name}}</td>
+        <td>{{this.dev_id}}</td>
+        <td>{{this.dev_name}}</td>
+        <td><button onclick="deleteDevDetails({{this.dev_details_id}})">Delete</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<script src="./js/delete_dev_detail.js"></script>
+
+{{!-- add data  --}}
+<h2>Adding Data with AJAX</h2>
+<p>To add a new developer detail, please enter their information below and click 'Submit'!</p>
+<form id="add-dev-detail-form-ajax">
+    <label for="input-tool_id">Tool ID: </label>
+    <select name="input-tool_id" id="input-tool_id-ajax">
+      <option value="">Select an AI Tool</option>
+      {{#each tools}}
+      <option value="{{this.tool_id}}">{{this.tool_name}}</option>
+      {{/each}}
+    </select>
+    
+    <label for="input-dev_id">Developer ID: </label>
+    <select name="input-dev_id" id="input-dev_id-ajax">
+      <option value="">Select a Developer</option>
+      {{#each devs}}
+      <option value="{{this.dev_id}}">{{this.dev_name}}</option>
+      {{/each}}
+    </select>
+
+    <input type="submit">
+</form>
+
+{{!-- search data  --}}
+<h2>Search Using an HTML Form</h2>
+
+<form id="search-tool-html" method='GET' action='/developerDetails.html'>
+    <label for="input-tool_id">AI Tool Name: </label>
+    <select name="tool_id" id="input-tool_id-html-search">
+        <option value="">Select an AI Tool</option>
+        {{#each tools}}
+        <option value="{{this.tool_id}}">{{this.tool_name}}</option>
+        {{/each}}
+    </select>    
+    <input type="submit">
+</form>
+
+<div style="text-align:center">
+    <a href='/developerDetails.html'><button>Reset</button></a>
+</div>
+
+<script src="./js/add_dev_detail.js"></script>
+
+<h2>Updating An AI Tool's Devloper Infomation</h2>
+<p>To update a tool-developer relationship</p>
+<ol>
+    <li>
+        Select a developer detail id 
+    </li>
+    <li>
+        Select the tool name associated with the developer detail id
+    </li>
+    <li>
+        Select a new developer name or don't select anything to remove the tool-developer relationship 
+    </li>
+</ol>
+
+{{!-- update  --}}
+<form id="update-dev-detail-form-ajax">
+
+    <label for="input-dev_details_id">Developer Detail ID: </label>
+    <select name="input-dev_details_id" id="mySelect">
+        <option value="test">Select an Order Detail ID</option>
+        {{#each data}}
+        <option value="{{this.dev_details_id}}">{{this.dev_details_id}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-tool_id">AI Tool Name: </label>
+    <select name="input-tool_id" id="input-tool_id-update">
+        <option value="test">Select an AI Tool</option>
+        {{#each tools}}
+        <option value="{{this.tool_id}}">{{this.tool_name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-dev_id">Developer Name: </label>
+    <select name="input-dev_id" id="input-dev_id-update">
+        <option>Select a Developer</option>
+        {{#each devs}}
+        <option value="{{this.dev_id}}">{{this.dev_name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+
+</form>
+
+{{!-- add js script  --}}
+<script src="./js/update_dev_detail.js"></script>

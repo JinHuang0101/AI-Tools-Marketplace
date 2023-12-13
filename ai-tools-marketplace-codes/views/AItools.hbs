@@ -1,0 +1,148 @@
+{{!-- Adapted from the starter code  --}}
+{{!-- Citation: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AITools</title>
+    <style>
+        body{
+            background-color: #9df9ef;
+        }
+
+        h1{
+            color: black;
+            font-family: "Droid Sans";
+            text-align: center;
+            font-size: 60px;
+        }
+        h2{
+            color: black;
+            font-family: "Droid Sans";
+            text-align: center;
+            font-size: 30px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: lavender;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #51e2f5;
+            color: white;
+        }
+        form{
+            text-align-last: center;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: 20px;
+        }
+         .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        label, p{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- div for nav bar html links -->
+<div class="topnav"> 
+    <a href="index.html">Home</a>
+    <a href="users.html">Users</a>
+    <a href="AItools.html">AI Tools</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="orders.html">Orders</a>
+    <a href="orderdetails.html">Order Details</a>
+    <a href="developers.html">Developers</a>
+    <a href="developerDetails.html">Developer Details</a>
+</div>
+
+<h1>AI Tools Page</h1>
+{{!-- table  --}}
+<table id="tools-table" class="center">
+     {{!-- header  --}}
+  <thead>
+    <tr>
+      {{#each data.[0]}}
+        <th>
+          {{@key}}
+        </th>
+      {{/each}}
+      <th>delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+     {{!-- data  --}}
+    {{#each data}}
+      <tr>
+        <td>{{this.tool_id}}</td>
+        <td>{{this.tool_name}}</td>
+        <td>{{this.tool_type}}</td>
+        <td>{{this.price}}</td>
+        <td>{{this.release_date}}</td>
+        <td>{{this.category}}</td>
+        <td><button onclick="deleteTool({{this.tool_id}})">Delete</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+</body>
+</html>
+
+{{!-- add data  --}}
+<h2>Adding Data with AJAX</h2>
+<p>To add a new tool, please enter the information below and click 'Submit'!</p>
+<form id="add-tool-form-ajax">
+    <label for="input-tool_name">tool name: </label>
+    <input type="text" name="input-tool_name" id="input-tool_name">
+    <label for="input-tool_type">tool type: </label>
+    <input type="text" name="input-tool_type" id="input-tool_type">
+    <label for="input-price">price: </label>
+    <input type="number" name="input-price" id="input-price">
+    <label for="input-release_date">release date: </label>
+    <input type="date" name="input-release_date" id="input-release_date">
+    <label for="input-category">category: </label>
+    <input type="text" name="input-category" id="input-category">
+    <input type="submit">
+</form>
+
+{{!-- search data  --}}
+<h2>Search Using an HTML Form</h2>
+<p>Search by AI Tool Name using the field below. </p>
+<form id="search-tool-html" method="GET" action="/AItools.html">
+    <label for="input-tool_name">Search by Tool Name: </label>
+   <input type="text" name="tool_name" id="input-tool_name-html-search">
+    <input type="submit">
+    <a href="/AItools.html"><button>Reset</button></a>
+</form>
+
+{{!-- add js script  --}}
+<script src="./js/add_tool.js"></script>
+<script src="./js/delete_tool.js"></script>

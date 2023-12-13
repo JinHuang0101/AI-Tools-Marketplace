@@ -1,0 +1,140 @@
+{{!-- Adapted from the starter code  --}}
+{{!-- Citation: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Developers</title>
+    <style>
+        body{
+            background-color: #9df9ef;
+        }
+
+        h1{
+            color: black;
+            font-family: "Droid Sans";
+            text-align: center;
+            font-size: 60px;
+        }
+        h2{
+            color: black;
+            font-family: "Droid Sans";
+            text-align: center;
+            font-size: 30px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: lavender;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #51e2f5;
+            color: white;
+        }
+        form{
+            text-align-last: center;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: 20px;
+        }
+         .center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        label, p{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- div for nav bar html links -->
+<div class="topnav">    
+    <a href="index.html">Home</a>
+    <a href="users.html">Users</a>
+    <a href="AItools.html">AI Tools</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="orders.html">Orders</a>
+    <a href="orderdetails.html">Order Details</a>
+    <a href="developers.html">Developers</a>
+    <a href="developerDetails.html">Developer Details</a>
+</div>
+<h1>Developer Page</h1>
+{{!-- table  --}}
+<table id="developers-table" class="center">
+  {{!-- header  --}}
+  <thead>
+    <tr>
+      <th>Developer ID</th>
+      <th>Developer Name</th>
+      <th>Developer Location</th>
+      <th>Developer Website</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+     {{!-- data  --}}
+    {{#each data}}
+      <tr>
+        <td>{{this.dev_id}}</td>
+        <td>{{this.dev_name}}</td>
+        <td>{{this.dev_location}}</td>
+        <td>{{this.dev_website}}</td>
+        <td><button onclick="deleteDev({{this.dev_id}})">Delete</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+</body>
+</html>
+
+{{!-- add data  --}}
+<h2>Adding Data with AJAX</h2>
+<p>To add a new developer, please enter their information below and click 'Submit'!</p>
+<form id="add-dev-form-ajax">
+    <label for="input-dev_name">developer name: </label>
+    <input type="text" name="input-dev_name" id="input-dev_name">
+    <label for="input-dev_location">developer location: </label>
+    <input type="text" name="input-dev_location" id="input-dev_location">
+    <label for="input-dev_website">developer website: </label>
+    <input type="text" name="input-dev_website" id="input-dev_website">
+    <input type="submit">
+</form>
+
+{{!-- search data  --}}
+<h2>Search Using an HTML Form</h2>
+<p>Search by Developer Name using the field below. </p>
+<form id="search-dev-html" method="GET" action="/developers.html">
+    <label for="input-dev_name">Search by Developer Name: </label>
+    <input type="text" name="dev_name" id="input-dev_name-html-search">
+    <input type="submit">
+    <a href="/developerDetails.html"><button>Reset</button></a>
+</form>
+
+{{!-- add js script  --}}
+<script src="./js/add_dev.js"></script>
+<script src="./js/delete_dev.js"></script>
