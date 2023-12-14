@@ -8,7 +8,7 @@ Schema for AI Tools Marketplace Project
 ![schema](https://github.com/JinHuang0101/AI-Tools-Marketplace/assets/54080607/7a17c516-5a98-4569-8ee7-d482bc775252)
 
 Screenshots of UI Pages
-<img width="1728" alt="Screenshot 2023-12-13 at 8 47 53 PM" src="https://github.com/JinHuang0101/AI-Tools-Marketplace/assets/54080607/b254b751-4c97-473d-81fa-51f81666919e">
+<img width="1728" alt="Screenshot 2023-12-13 at 10 26 43 PM" src="https://github.com/JinHuang0101/AI-Tools-Marketplace/assets/54080607/c4ff0c72-b689-4008-84f4-c1a71454306e">
 <img width="1728" alt="Screenshot 2023-12-13 at 8 48 16 PM" src="https://github.com/JinHuang0101/AI-Tools-Marketplace/assets/54080607/07577d4e-675a-4b5f-b38f-02775466db62">
 <img width="1728" alt="Screenshot 2023-12-13 at 8 48 25 PM" src="https://github.com/JinHuang0101/AI-Tools-Marketplace/assets/54080607/72581a17-a859-4f9a-9be6-a499b76d468e">
 <img width="1728" alt="Screenshot 2023-12-13 at 8 48 32 PM" src="https://github.com/JinHuang0101/AI-Tools-Marketplace/assets/54080607/ed71d72a-ea4d-4211-9898-fb11763bb3a4">
