@@ -1,14 +1,19 @@
-{{!-- Adapted from the starter code  --}}
 {{!-- Citation: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Orders</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
         body{
-            background-color: #9df9ef;
+            {{!-- background-color: #9df9ef; --}}
         }
 
         h1{
@@ -28,37 +33,8 @@
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
         }
-
-        .topnav {
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        .topnav a {
-            float: left;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-
-        .topnav a:hover {
-            background-color: lavender;
-            color: black;
-        }
-
-        .topnav a.active {
-            background-color: #51e2f5;
-            color: white;
-        }
         form{
             text-align-last: center;
-        }
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            font-size: 20px;
         }
          .center {
             margin-left: auto;
@@ -70,20 +46,26 @@
     </style>
 </head>
 <body>
-<div class="topnav">    
-    <a href="index.html">Home</a>
-    <a href="users.html">Users</a>
-    <a href="AItools.html">AI Tools</a>
-    <a href="downloads.html">Downloads</a>
-    <a href="orders.html">Orders</a>
-    <a href="orderdetails.html">Order Details</a>
-    <a href="developers.html">Developers</a>
-    <a href="developerDetails.html">Developer Details</a>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+    <div class="nav navbar-nav">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="index.html">Home</span></a>
+            <a class="nav-item nav-link" href="users.html">Users</a>
+            <a class="nav-item nav-link" href="AItools.html">AI Tools</a>
+            <a class="nav-item nav-link" href="downloads.html">Downloads</a>
+            <a class="nav-item nav-link" href="orders.html">Orders</a>
+            <a class="nav-item nav-link" href="orderdetails.html">Order Details</a>
+            <a class="nav-item nav-link" href="developers.html">Developers</a>
+            <a class="nav-item nav-link" href="developerDetails.html">Developer Details</a>
+        </div>
+    </div>  
+    </div>
+</nav>
 
 <h1>Orders Page</h1>
-{{!-- table  --}}
-<table id="orders-table" calss="center">
+<div class="container">
+<table id="orders-table" class="table table-hover">
   <thead>
       <th>Order ID</th>
       <th>User ID</th>
@@ -96,7 +78,6 @@
   </thead>
 
   <tbody>
-    {{!-- data  --}}
     {{#each data}}
       <tr>
         <td>{{this.order_id}}</td>
@@ -105,17 +86,16 @@
         <td>{{this.order_date}}</td>
         <td>{{this.order_amount}}</td>
         <td>{{this.payment_complete}}</td>
-        <td><button onclick="deleteOrder({{this.order_id}})">Delete</button></td>
+        <td><button type="button" class="btn btn-danger" onclick="deleteOrder({{this.order_id}})">Delete</button></td>
       </tr>
     {{/each}}
   </tbody>
 </table>
-
-</body>
-</html>
+</div>
 
 {{!-- add data  --}}
-<h2>Adding Data with AJAX</h2>
+<div class="container">
+    <h2>Adding Data with AJAX</h2>
 <p>To add a new order, please enter their information below and click 'Submit'!</p>
 <form id="add-order-form-ajax">
 
@@ -140,9 +120,10 @@
 
     <input type="submit">
 </form>
+</div>
 
-{{!-- search  --}}
-<h2>Search Using an HTML Form</h2>
+<div class="container">
+    <h2>Search Using an HTML Form</h2>
 <p>Search by Order ID using the field below. </p>
 <form id="search-order-html" method="GET" action="/orders.html">
     <label for="input-order_id">Search by Order ID: </label>
@@ -151,9 +132,13 @@
 </form>
 
 <div style="text-align:center">
-    <a href="/orders.html"><button>Reset</button></a>
+    <a href="/orders.html"><button type="button" class="btn btn-default">Reset</button></a>
 </div>
 
-{{!-- add js script  --}}
+</div>
+</body>
+</html>
+
 <script src="./js/add_order.js"></script>
 <script src="./js/delete_order.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
